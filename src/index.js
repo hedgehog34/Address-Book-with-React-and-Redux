@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import "./styles.css";
 
-import ContactList from "./components/contact/ContactList";
+import ContactList from "./components/ContactList";
 
 class App extends React.Component {
   render() {

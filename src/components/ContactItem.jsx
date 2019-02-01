@@ -2,7 +2,7 @@ import React, { useState, Fragment } from "react";
 import { string, number, oneOfType } from "prop-types";
 
 import { Editor } from "./Editor";
-import { PostCodeEditor } from "../PostCodeEditor";
+import { PostCodeEditor } from "./PostCodeEditor";
 
 import "./styles.scss";
 

@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 
 import { AddressSelectList } from "./AddressSelectList";
-import { Editor } from "./contact/Editor";
+import { Editor } from "./Editor";
 
 export const PostCodeEditor = ({ value, handleChange, isEdited }) => {
   return (

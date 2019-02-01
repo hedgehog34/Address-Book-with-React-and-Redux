@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 
-import { addContact, deleteContact, editContact } from "../../redux/actions";
+import { addContact, deleteContact, editContact } from "../redux/actions";
 
 import { ContactItem } from "./ContactItem";
-import { guidGenerator } from "../../helpers";
+import { guidGenerator } from "../helpers";
 
 const ContactList = ({
   contactList,
