@@ -6,11 +6,11 @@ const initialState = [
   {
     id: 1,
     name: "Yanek",
-    address1: "123",
-    address2: "Qwerty Road",
-    city: "Permambukoo",
-    county: "Podkarpackie",
-    postcode: "QW125RT",
+    address1: "Prime Minister & First Lord Of The Treasury",
+    address2: "10 Downing Street",
+    city: "London",
+    county: "LONDON",
+    postcode: "SW1A 2AA",
     telephone: 1234567890,
     email: "rur@gg.com"
   },

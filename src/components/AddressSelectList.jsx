@@ -1,8 +1,10 @@
 import React, { Component, Fragment } from "react";
-import axios from "axios";
+
+import API from "../api";
 
 export class AddressSelectList extends Component {
   state = {
+    error: null,
     isLoaded: false,
     data: []
   };
@@ -11,32 +13,28 @@ export class AddressSelectList extends Component {
     const { postcode } = this.props;
 
     if (postcode !== prevProps.postcode) {
-      axios
-        .get(
-          `https://api.ideal-postcodes.co.uk/v1/postcodes/${postcode}?api_key=ak_jrmc1crlelSJE7fD7dksAfLqJ2K4B`
-        )
+      API.get(`postcodes/${postcode}`)
         .then(res => {
           const result = res.data.result;
           this.setState({
             isLoaded: true,
             data: result
           });
+        })
+        .catch(error => {
+          console.log("error", error.response);
+          this.setState({
+            isLoaded: true,
+            error: error.response,
+            data: []
+          });
         });
-      // .catch(error => {
-      //   console.log("error", error.response);
-      //   this.setState({
-      //     isLoaded: true,
-      //     error: error.response,
-      //     data: []
-      //   });
-      // });
     }
   }
 
   render() {
     const { data, isLoaded } = this.state;
-
-    // console.log(data);
+    const { isEdited, handleAddressSelection } = this.props;
 
     const list = data.map(pc => {
       return {
@@ -48,7 +46,7 @@ export class AddressSelectList extends Component {
     });
 
     const buildAddressList = () => {
-      const listOfValues = list.map((l, i) => {
+      const listOfOptions = list.map((l, i) => {
         const value = `${l.address1}, ${l.address2}, ${l.city}, ${l.county}`;
         return (
           <option key={i} value={value}>
@@ -61,7 +59,7 @@ export class AddressSelectList extends Component {
         <option key="choice" value="">
           --Please choose an address--
         </option>,
-        ...listOfValues
+        ...listOfOptions
       ];
     };
 
@@ -69,12 +67,16 @@ export class AddressSelectList extends Component {
       <Fragment>
         <label className="italic" htmlFor="adress-select">
           Find your address:
-          <select id="adress-select">{buildAddressList()}</select>
+          <select
+            id="adress-select"
+            disabled={isEdited}
+            onChange={handleAddressSelection}
+          >
+            {buildAddressList()}
+          </select>
         </label>
       </Fragment>
     );
-
-    // console.log(addressesList);
 
     return addressesList;
   }

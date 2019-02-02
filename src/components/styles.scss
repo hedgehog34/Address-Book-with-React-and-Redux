@@ -12,9 +12,8 @@ label {
   display: grid;
   grid-template-columns: 150px calc(100% - 170px);
 
-  &--italic {
+  &.italic {
     font-style: italic;
-    text-decoration: underline;
     color: rgba(0, 0, 0, 0.7);
   }
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
@@ -7,7 +7,9 @@ import "./styles.css";
 
 import ContactList from "./components/ContactList";
 
-class App extends React.Component {
+// Start of application, whereI use a React-Redux Provider which allows for passing down the redux store
+// to the <ContactList/> component
+class App extends Component {
   render() {
     return (
       <Provider store={store}>

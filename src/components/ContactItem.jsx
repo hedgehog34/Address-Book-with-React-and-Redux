@@ -6,6 +6,8 @@ import { PostCodeEditor } from "./PostCodeEditor";
 
 import "./styles.scss";
 
+// <ContactItem is a component composed with set of Editors, where user can add essential information to build the <ContactItem/>
+// propTypes check, as a good practice for checking up the type of information passed to the component
 const propTypes = {
   id: oneOfType([number, string]),
   name: string,
@@ -32,6 +34,9 @@ export const ContactItem = ({
   email,
   edited = false
 }) => {
+  // Experimenting with new React feature Hooks, which provides way for persisting state in functional component,
+  // which up to this point was reserved only for React classes. value passed to the useState function call is an initial state value for
+  // state variable 'isEdited'
   const [isEdited, enableEditing] = useState(edited);
 
   const handleChange = e => {
@@ -56,30 +61,6 @@ export const ContactItem = ({
         <Editor
           name="telephone"
           value={telephone}
-          handleChange={handleChange}
-          isEdited={!isEdited}
-        />
-        <Editor
-          name="address1"
-          value={address1}
-          handleChange={handleChange}
-          isEdited={!isEdited}
-        />
-        <Editor
-          name="address2"
-          value={address2}
-          handleChange={handleChange}
-          isEdited={!isEdited}
-        />
-        <Editor
-          name="city"
-          value={city}
-          handleChange={handleChange}
-          isEdited={!isEdited}
-        />
-        <Editor
-          name="county"
-          value={county}
           handleChange={handleChange}
           isEdited={!isEdited}
         />
