@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from "react";
 
 import API from "../api";
-
+// This component receives handleAddressSelection callback which allows its parent to update address
+// data. This is classical React class component with state and componentDidUpdate lifecycle method used
+// for making a call to the postcodes api (api.ideal-postcodes)
 export class AddressSelectList extends Component {
   state = {
     error: null,
@@ -36,6 +38,8 @@ export class AddressSelectList extends Component {
     const { data, isLoaded } = this.state;
     const { isEdited, handleAddressSelection } = this.props;
 
+    // this transforms the received data from api into the array of objects which can be reused
+    // for building the option list below
     const list = data.map(pc => {
       return {
         address1: pc.line_1,

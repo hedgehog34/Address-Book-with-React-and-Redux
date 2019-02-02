@@ -2,7 +2,7 @@ import React, { useState, Fragment } from "react";
 import { string, number, oneOfType } from "prop-types";
 
 import { Editor } from "./Editor";
-import { PostCodeEditor } from "./PostCodeEditor";
+import { AddressEditor } from "./AddressEditor";
 
 import "./styles.scss";
 
@@ -39,6 +39,7 @@ export const ContactItem = ({
   // state variable 'isEdited'
   const [isEdited, enableEditing] = useState(edited);
 
+  // Generalized callback for updating the state of each editor passed down to Editors as prop
   const handleChange = e => {
     editContact(id, e.target.name, e.target.value);
   };
@@ -64,8 +65,12 @@ export const ContactItem = ({
           handleChange={handleChange}
           isEdited={!isEdited}
         />
-        <PostCodeEditor
-          value={postcode}
+        <AddressEditor
+          postcode={postcode}
+          address1={address1}
+          address2={address2}
+          city={city}
+          county={county}
           handleChange={handleChange}
           isEdited={!isEdited}
         />
