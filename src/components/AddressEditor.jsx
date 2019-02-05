@@ -14,40 +14,42 @@ export const AddressEditor = ({
   city,
   county,
   handleChange,
+  handleAddressSelection,
   isEdited
 }) => {
-  const [values, setValues] = useState([address1, address2, city, county]);
+  // const [values, setValues] = useState([address1, address2, city, county]);
 
   // Callback function passed to the <AddressSelectList/>,
   // it creates an array based on the info from the child and updates the state accordingly
-  const handleAddressSelection = event => {
-    const newValues = event.target.value.split(",").map(str => str.trimStart());
-    setValues(newValues);
-  };
+  // const handleAddressSelection = event => {
+  //   const newValues = event.target.value.split(",").map(str => str.trimStart());
+  //   console.log(newValues);
+  //   setValues(newValues);
+  // };
 
-  const addressEditors = values.find(val => val !== "") && (
+  const addressEditors = (
     <Fragment>
       <Editor
         name="address1"
-        value={values[0]}
+        value={address1}
         handleChange={handleChange}
         isEdited={isEdited}
       />
       <Editor
         name="address2"
-        value={values[1]}
+        value={address2}
         handleChange={handleChange}
         isEdited={isEdited}
       />
       <Editor
         name="city"
-        value={values[2]}
+        value={city}
         handleChange={handleChange}
         isEdited={isEdited}
       />
       <Editor
         name="county"
-        value={values[3]}
+        value={county}
         handleChange={handleChange}
         isEdited={isEdited}
       />

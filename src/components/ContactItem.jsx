@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 import { string, number, oneOfType } from "prop-types";
 
 import { Editor } from "./Editor";
@@ -44,51 +44,67 @@ export const ContactItem = ({
     editContact(id, e.target.name, e.target.value);
   };
 
+  // Callback function passed to the <AddressSelectList/>,
+  // it creates an array based on the info from the child and updates the state accordingly
+  const handleAddressSelection = event => {
+    const newValues = event.target.value.split(",").map(str => str.trimStart());
+    editContact(id, "address1", newValues[0]);
+    editContact(id, "address2", newValues[1]);
+    editContact(id, "city", newValues[2]);
+    editContact(id, "county", newValues[3]);
+    console.log(newValues);
+  };
+
+  const handleEdit = e => {
+    e.preventDefault();
+    isEdited ? enableEditing(false) : enableEditing(true);
+  };
+
   return (
-    <Fragment>
-      <div className="item">
-        <Editor
-          name="name"
-          value={name}
-          handleChange={handleChange}
-          isEdited={!isEdited}
-        />
-        <Editor
-          name="email"
-          value={email}
-          handleChange={handleChange}
-          isEdited={!isEdited}
-        />
-        <Editor
-          name="telephone"
-          value={telephone}
-          handleChange={handleChange}
-          isEdited={!isEdited}
-        />
-        <AddressEditor
-          postcode={postcode}
-          address1={address1}
-          address2={address2}
-          city={city}
-          county={county}
-          handleChange={handleChange}
-          isEdited={!isEdited}
-        />
-        <div>
-          <button
-            className="contact-control"
-            onClick={() =>
-              isEdited ? enableEditing(false) : enableEditing(true)
-            }
-          >
-            {isEdited ? "Finish Editing" : "Edit Contact"}
-          </button>
-          <button className="contact-control" onClick={() => deleteContact(id)}>
-            Delete Contact
-          </button>
-        </div>
+    <div className="ui segment">
+      <Editor
+        name="name"
+        value={name}
+        handleChange={handleChange}
+        isEdited={!isEdited}
+      />
+      <Editor
+        name="email"
+        value={email}
+        handleChange={handleChange}
+        isEdited={!isEdited}
+      />
+      <Editor
+        name="telephone"
+        value={telephone}
+        handleChange={handleChange}
+        isEdited={!isEdited}
+      />
+      <AddressEditor
+        postcode={postcode}
+        address1={address1}
+        address2={address2}
+        city={city}
+        county={county}
+        handleChange={handleChange}
+        handleAddressSelection={handleAddressSelection}
+        isEdited={!isEdited}
+      />
+      <div className="ui buttons">
+        <button
+          className={`ui ${isEdited ? "primary" : ""} button`}
+          onClick={handleEdit}
+        >
+          {isEdited ? "Finish Editing" : "Edit Contact"}
+        </button>
+        <button
+          className="ui negative button"
+          onClick={() => deleteContact(id)}
+        >
+          Delete Contact
+        </button>
       </div>
-    </Fragment>
+    </div>
   );
 };
 

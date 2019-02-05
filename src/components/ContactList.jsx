@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import { addContact, deleteContact, editContact } from "../redux/actions";
@@ -49,12 +49,15 @@ const ContactList = ({
 
   // We need a button for adding new
   return (
-    <Fragment>
-      <button onClick={() => addContact(guidGenerator())}>
+    <div className="ui container">
+      <button
+        className="contact-control ui primary button"
+        onClick={() => addContact(guidGenerator())}
+      >
         Add New Contact
       </button>
-      <div>{list}</div>
-    </Fragment>
+      <form className="ui form">{list}</form>
+    </div>
   );
 };
 
