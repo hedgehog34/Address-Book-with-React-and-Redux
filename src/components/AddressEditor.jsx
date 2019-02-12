@@ -17,16 +17,6 @@ export const AddressEditor = ({
   handleAddressSelection,
   isEdited
 }) => {
-  // const [values, setValues] = useState([address1, address2, city, county]);
-
-  // Callback function passed to the <AddressSelectList/>,
-  // it creates an array based on the info from the child and updates the state accordingly
-  // const handleAddressSelection = event => {
-  //   const newValues = event.target.value.split(",").map(str => str.trimStart());
-  //   console.log(newValues);
-  //   setValues(newValues);
-  // };
-
   const addressEditors = (
     <Fragment>
       <Editor

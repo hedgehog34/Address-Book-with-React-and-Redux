@@ -3,6 +3,7 @@ import { string, number, oneOfType } from "prop-types";
 
 import { Editor } from "./Editor";
 import { AddressEditor } from "./AddressEditor";
+import { zip } from "../helpers";
 
 import "./styles.scss";
 
@@ -47,12 +48,10 @@ export const ContactItem = ({
   // Callback function passed to the <AddressSelectList/>,
   // it creates an array based on the info from the child and updates the state accordingly
   const handleAddressSelection = event => {
+    // <TODO:>find a bug of not updating the address fields after action</TODO:>
     const newValues = event.target.value.split(",").map(str => str.trimStart());
-    editContact(id, "address1", newValues[0]);
-    editContact(id, "address2", newValues[1]);
-    editContact(id, "city", newValues[2]);
-    editContact(id, "county", newValues[3]);
-    console.log(newValues);
+    const zipped = zip(["address1", "address2", "city", "county"], newValues);
+    zipped.forEach(arr => editContact(id, arr[0], arr[1]));
   };
 
   const handleEdit = e => {

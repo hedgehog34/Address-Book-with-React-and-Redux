@@ -15,6 +15,7 @@ export const deleteContact = id => {
 };
 
 export const editContact = (id, fieldName, fieldValue) => {
+  console.log(id, fieldName, fieldValue);
   return {
     type: EDIT_CONTACT,
     id,

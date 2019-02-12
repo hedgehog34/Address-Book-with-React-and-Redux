@@ -19,3 +19,5 @@ export const guidGenerator = () => {
     S4()
   );
 };
+
+export const zip = (a1, a2) => a1.map((x, i) => [x, a2[i]]);

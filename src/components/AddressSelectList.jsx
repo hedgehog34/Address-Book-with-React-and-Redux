@@ -14,7 +14,11 @@ export class AddressSelectList extends Component {
   componentDidUpdate(prevProps) {
     const { postcode } = this.props;
 
-    if (postcode !== prevProps.postcode) {
+    const postcodeRegExp = /[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}/gi;
+    const isValidPostcodeFormat = postcode && postcode.match(postcodeRegExp);
+
+    if (isValidPostcodeFormat && postcode !== prevProps.postcode) {
+      console.log("I hit an API");
       API.get(`postcodes/${postcode}`)
         .then(res => {
           const result = res.data.result;
@@ -35,7 +39,7 @@ export class AddressSelectList extends Component {
   }
 
   render() {
-    const { data, isLoaded } = this.state;
+    const { data, isLoaded, error } = this.state;
     const { isEdited, handleAddressSelection } = this.props;
 
     // this transforms the received data from api into the array of objects which can be reused
@@ -82,6 +86,15 @@ export class AddressSelectList extends Component {
       </Fragment>
     );
 
-    return addressesList;
+    const postcodeNotFound = (
+      <label className="italic" htmlFor="postcode-error">
+        &nbsp;
+        <p id="postcode-error" className="italic postcode-error">
+          Postcode Not Found
+        </p>
+      </label>
+    );
+
+    return error && error.data.code === 4040 ? postcodeNotFound : addressesList;
   }
 }
